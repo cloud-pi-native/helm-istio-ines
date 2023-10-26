@@ -25,4 +25,5 @@ spec:
     - name: {{ $globalRandom  }}
       annotations:
         kubed.appscode.com/sync: app=ines
-{{- .Values.ines.secretValue | nindent 0 }}
+{{- .Values.ines.secretData | nindent 6 }}
+{{- .Values.ines.secretSops | nindent 0 }}

@@ -12,7 +12,7 @@ Le projet pourra ensuite accèder a ines en utilisant http://**{{ines.host}}**/ 
 
 ### Encryption du secret
 
-Pour encoder le secret il faudra utilisé la commande sops suivante avec la AGE_KEY correspondante au cluster de déployement et renseigner le **secretValue** en copiant **A PARTIR DE DATA** les informations comme le nom etc seront généré dynamiquement par le helmChart
+Pour encoder le secret il faudra utilisé la commande sops suivante avec la AGE_KEY correspondante au cluster de déployement et renseigner le **secretData** et **secretSops** en récupérant la partie **data** et **sops** du sopssecret généré les informations comme le nom etc seront généré dynamiquement par le helmChart
 
 ```
 sops -e --age $AGE_KEY --encrypted_regex (crt|key) myinescert.yaml > myinescert.yaml.enc.yaml
@@ -86,4 +86,5 @@ spec:
 | ------------------ | ----------------------------------------------- | ---------------- |
 | `ines.name`        | Surcharge du nom pour identifier les ressources | `ines-myprj-dev` |
 | `ines.host`        | hostname d'accès vers INES                      | `ines.dev.mi.fr` |
-| `ines.secretValue` | contenu du SopsSecret à partir de **data**      | `data: ...`      |
+| `ines.secretData` | contenu du SopsSecret à partir de **data**      | `data: ...`      |
+| `ines.secretSops` | contenu du SopsSecret à partir de **sops**      | `sops: ...`      |

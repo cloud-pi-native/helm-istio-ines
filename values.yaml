@@ -1,12 +1,12 @@
 ines:
   name: ines-myproject-dev
   host: ines.dev.mi.fr
-  secretValue: |-
-    ##
-          data:
-              ca.crt: XXX
-              tls.crt: XXX
-              tls.key: XXX
+  secretData: |
+    data:
+      ca.crt: XXX
+      tls.crt: XXX
+      tls.key: XXX
+  secretSops: |
     sops:
       kms: []
       gcp_kms: []
