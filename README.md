@@ -82,9 +82,9 @@ spec:
 
 ### Helm values
 
-| Parameter          | Description                                     | Default          |
-| ------------------ | ----------------------------------------------- | ---------------- |
-| `ines.name`        | Surcharge du nom pour identifier les ressources | `ines-myprj-dev` |
-| `ines.host`        | hostname d'accès vers INES                      | `ines.dev.mi.fr` |
+| Parameter         | Description                                     | Default          |
+| ----------------- | ----------------------------------------------- | ---------------- |
+| `ines.name`       | Surcharge du nom pour identifier les ressources | `ines-myprj-dev` |
+| `ines.host`       | hostname d'accès vers INES                      | `ines.dev.mi.fr` |
 | `ines.secretData` | contenu du SopsSecret à partir de **data**      | `data: ...`      |
 | `ines.secretSops` | contenu du SopsSecret à partir de **sops**      | `sops: ...`      |
