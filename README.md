@@ -18,6 +18,66 @@ Pour encoder le secret il faudra utilisé la commande sops suivante avec la AGE_
 sops -e --age $AGE_KEY --encrypted_regex (crt|key) myinescert.yaml > myinescert.yaml.enc.yaml
 ```
 
+### Ajout du sidecar istio
+
+Afin de pouvoir communiqué avec l'egress gateway d'istio, un sidecar devra être à vos déployement necessitant l'utilisation d'INES.
+Pour cela l'ajout du label `sidecar.istio.io/inject: "true"` sera necessaire.
+
+Exemple d'ajout du sidecar :
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "true"
+        app: nginx
+        env: dev
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: bitnami/nginx:1.25.3
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 50m
+              memory: "128Mi"
+            requests:
+              cpu: 5m
+              memory: "128Mi"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+```
+
 ### Helm values
 
 | Parameter          | Description                                     | Default          |
