@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vr-out-{{ .Values.ines.name }}
+spec:
+  hosts:
+    - {{ .Values.ines.host }}
+  gateways:
+    - gat-{{ .Values.ines.name }}
+    - mesh
+  http:
+    - match:
+        - gateways:
+            - mesh
+          port: 80
+      route:
+        - destination:
+            host: egress-gateway.istio-system.svc.cluster.local
+            subset: ines
+            port:
+              number: 80
+          weight: 100
+    - match:
+        - gateways:
+            - gat-{{ .Values.ines.name }}
+          port: 80
+      route:
+        - destination:
+            host: {{ .Values.ines.host }}
+            port:
+              number: 443
+          weight: 100
