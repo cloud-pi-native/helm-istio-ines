@@ -19,10 +19,10 @@ spec:
 apiVersion: isindir.github.com/v1alpha3
 kind: SopsSecret
 metadata:
-  name: sops-ines
+  name: sops-{{ .Values.ines.name }}
 spec:
   secretTemplates:
     - name: {{ $globalRandom  }}
       annotations:
         kubed.appscode.com/sync: app=ines
-{{- .Values.ines.secretValue | nindent 6 }}
+{{- .Values.ines.secretValue | nindent 0 }}

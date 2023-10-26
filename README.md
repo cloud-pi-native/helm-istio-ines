@@ -21,7 +21,7 @@ sops -e --age $AGE_KEY --encrypted_regex (crt|key) myinescert.yaml > myinescert.
 ### Ajout du sidecar istio
 
 Afin de pouvoir communiqué avec l'egress gateway d'istio, un sidecar devra être à vos déployement necessitant l'utilisation d'INES.
-Pour cela l'ajout du label `sidecar.istio.io/inject: "true"` sera necessaire.
+Pour cela l'ajout du label `sidecar.istio.io/inject: "true"` sera necessaire ainsi que l'utilisation d'un serviceAccount spécifique `serviceAccount: istio-sa`.
 
 Exemple d'ajout du sidecar :
 
@@ -45,6 +45,8 @@ spec:
         env: dev
         tier: frontend
     spec:
+      serviceAccount: istio-sa
+      serviceAccountName: istio-sa
       containers:
         - name: nginx
           image: bitnami/nginx:1.25.3
