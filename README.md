@@ -17,6 +17,7 @@ Pour encoder le secret il faudra utilisé la commande sops suivante avec la AGE_
 ```
 sops -e --age $AGE_KEY --encrypted_regex (crt|key) myinescert.yaml > myinescert.yaml.enc.yaml
 ```
+[Pour plus d'information consulter la documentation sur la gestion des secrets](https://github.com/cloud-pi-native/documentation/blob/master/gestion-secrets.md)
 
 ### Ajout du sidecar istio
 
