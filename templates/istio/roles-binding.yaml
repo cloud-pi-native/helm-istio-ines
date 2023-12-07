@@ -24,7 +24,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: istio-role
-  namespace: {{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
   name: istio-sa
