@@ -5,7 +5,7 @@ metadata:
 spec:
   host: egress-gateway.istio-system.svc.cluster.local
   subsets:
-    - name: ines
+    - name: se-{{ .Values.ines.name }}
       trafficPolicy:
         loadBalancer:
           simple: ROUND_ROBIN
