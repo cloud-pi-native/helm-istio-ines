@@ -13,7 +13,7 @@ spec:
           number: 443
         tls:
           mode: MUTUAL
-          credentialName: {{ $globalRandom  }}
+          credentialName: {{ .Release.Namespace }}
           sni: {{ .Values.ines.host }}
 ---
 apiVersion: isindir.github.com/v1alpha3
@@ -22,7 +22,7 @@ metadata:
   name: sops-{{ .Values.ines.name }}
 spec:
   secretTemplates:
-    - name: {{ $globalRandom  }}
+    - name: {{ .Release.Namespace }}
       annotations:
         kubed.appscode.com/sync: app=ines
 {{- .Values.ines.secretData | nindent 6 }}

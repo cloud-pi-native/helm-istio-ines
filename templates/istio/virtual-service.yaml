@@ -16,7 +16,7 @@ spec:
       route:
         - destination:
             host: egress-gateway.istio-system.svc.cluster.local
-            subset: se-{{ .Values.ines.name }}
+            subset: se-ines
             port:
               number: 80
           weight: 100
